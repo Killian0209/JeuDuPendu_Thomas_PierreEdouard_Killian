@@ -1,16 +1,16 @@
 package main
 
 import (
+	"Pendu/src"
 	"fmt"
 	"os"
-	//"pendu/src"
 )
 
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "jouer":
-			jouer()
+			src.Jouer()
 		default:
 			fmt.Println("Commande incorrecte")
 		}
@@ -18,5 +18,3 @@ func main() {
 		fmt.Println("il faut écrire pour commencer: go run . jouer")
 	}
 }
-
-func jouer() 
