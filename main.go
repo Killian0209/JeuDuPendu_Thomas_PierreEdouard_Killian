@@ -11,6 +11,10 @@ func main() {
 		switch os.Args[1] {
 		case "jouer":
 			src.Jouer()
+		case "reprendre":
+			src.Reprendre()
+		case "scores":
+			src.Scores()
 		default:
 			fmt.Println("Commande incorrecte")
 		}
