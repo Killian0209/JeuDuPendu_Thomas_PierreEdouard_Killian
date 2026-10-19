@@ -20,5 +20,7 @@ func main() {
 		}
 	} else {
 		fmt.Println("il faut écrire pour commencer: go run . jouer")
+		fmt.Println("il faut écrire pour reprendre: go run . reprendre")
+		fmt.Println("il faut écrire pour scores: go run . scores")
 	}
 }
