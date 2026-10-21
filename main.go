@@ -6,17 +6,21 @@ import (
 	"os"
 )
 
+var joueur src.Joueur
+
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
+
 		case "jouer":
-			src.Jouer()
+			joueur.InitJoueur()
 		case "reprendre":
 			src.Reprendre()
 		case "scores":
 			src.Scores()
 		default:
 			fmt.Println("Commande incorrecte")
+
 		}
 	} else {
 		fmt.Println("il faut écrire pour commencer: go run . jouer")
@@ -24,3 +28,5 @@ func main() {
 		fmt.Println("il faut écrire pour scores: go run . scores")
 	}
 }
+
+
