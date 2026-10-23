@@ -58,14 +58,15 @@ func (g *Game) Jouer() error {
 			save(currentPlay) // envoie les donnée de la partie
 			return err
 		}
-		if len(lettre) != 1 {
-			fmt.Println("l'entrée doit être d'une seule lettre") //verifie si l'entrée est de qu'une seule lettre
-			compteurEssai -= 1
-			continue
-		}
 
 		if lettre >= "A" && lettre <= "Z" {
-			lettre = strings.ToLower(lettre) // met en minuscule les lettre en maj
+			lettre = strings.ToLower(lettre) // met en minuscule les lettres en maj
+		}
+
+		if len(lettre) != 1 {
+			fmt.Println("l'entrée doit être d'une seule lettre") //verifie si l'entrée est de qu'une seule lettre
+			compteurEssai--
+			continue
 		}
 
 		dejaUtilisee := false
@@ -90,6 +91,28 @@ func (g *Game) Jouer() error {
 		}
 		fmt.Println(list_Lettres) //liste de lettre deja proposé
 
+		if compteurEssai < 0 {
+			compteurEssai = 0
+		}
+
+		if compteurEssai >= 6 {
+			fmt.Println("Tous les essais ont été utilisés")
+			fmt.Println("Partie Perdu !")
+			break
+		}
+
+		for k := range g.Mot {
+			if lettre == string(g.Mot[k]) {
+				compteurEssai--
+			}
+			if lettre[0] != g.Mot[k] {
+				list_Lettres = append(list_Lettres, lettre)
+				compteurEssai++
+				fmt.Printf("Vous avez utilisé %d/6 essais ", compteurEssai)
+				break
+			}
+		}
+
 		for i := 0; i < len(g.Mot); i++ {
 			for j := 0; j < len(g.Lettre); j++ {
 
@@ -100,6 +123,7 @@ func (g *Game) Jouer() error {
 				}
 			}
 		}
+
 		if g.Mot == g.MotATrouver {
 			fmt.Println("Victoire ! Le mot a été trouvé.")
 			break
