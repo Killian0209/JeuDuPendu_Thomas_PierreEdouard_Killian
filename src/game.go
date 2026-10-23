@@ -10,7 +10,7 @@ import (
 var partie Game
 
 var lettre string
-var Lettres []byte
+var list_Lettres []string
 
 type Joueur struct {
 	Pseudo string
@@ -51,9 +51,8 @@ func (g *Game) Jouer(pseudo string) error {
 		fmt.Scan(&lettre)
 
 		if lettre == "!save" || lettre == "!s" {
-			strings.ToLower(lettre)
 
-			save(pseudo, lettre, compteurEssai) // envoie les donnée de la partie
+			save(pseudo, list_Lettres, compteurEssai) // envoie les donnée de la partie
 			return err
 		}
 		if len(lettre) != 1 {
@@ -76,6 +75,7 @@ func (g *Game) Jouer(pseudo string) error {
 
 		for k := range g.MotATrouver {
 			if lettre[0] != g.MotATrouver[k] {
+				list_Lettres = append(list_Lettres, lettre)
 				compteurEssai += 1
 				fmt.Printf("Vous avez utilisé %d/6 essais ", compteurEssai)
 				break
@@ -97,7 +97,6 @@ func (g *Game) Jouer(pseudo string) error {
 				}
 			}
 		}
-		fmt.Printf("%d", compteurEssai)
 		if g.Mot == g.MotATrouver {
 			fmt.Println("Victoire ! Le mot a été trouvé.")
 			break
