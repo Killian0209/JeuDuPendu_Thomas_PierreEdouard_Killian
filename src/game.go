@@ -12,23 +12,19 @@ var partie Game
 var lettre string
 var list_Lettres []string
 
-type Joueur struct {
-	Pseudo string
-}
-
-func (j *Joueur) InitJoueur() {
-	fmt.Print("Choisissez votre pseudo: ")
-	fmt.Scan(&j.Pseudo)
-	fmt.Println("Bonjour: ", j.Pseudo, "!")
-	partie.Jouer(j.Pseudo)
-}
-
 type Game struct {
-	Player      Joueur
+	Pseudo      string
 	MotATrouver string
 	Mot         string
 	Essai       int
 	Lettre      []string
+}
+
+func (g *Game) InitJoueur() {
+	fmt.Print("Choisissez votre pseudo: ")
+	fmt.Scan(&g.Pseudo)
+	fmt.Println("Bonjour: ", g.Pseudo, "!")
+	partie.Jouer(g.Pseudo)
 }
 
 func (g *Game) Jouer(pseudo string) error {
@@ -50,8 +46,7 @@ func (g *Game) Jouer(pseudo string) error {
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
 		if lettre == "!save" || lettre == "!s" {
-			lettre = strings.ToLower(lettre)
-			save(pseudo, lettre, 0) // envoie les donnée de la partie
+			save(pseudo, list_Lettres, compteurEssai) // envoie les donnée de la partie
 			return err
 		}
 		if len(lettre) != 1 {

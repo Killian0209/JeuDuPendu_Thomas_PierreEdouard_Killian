@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-var joueur src.Joueur
+var joueur src.Game
 
 func main() {
 	if len(os.Args) > 1 {
