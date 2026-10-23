@@ -6,14 +6,12 @@ import (
 	"os"
 )
 
-var joueur src.Joueur
-
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 
 		case "jouer":
-			joueur.InitJoueur()
+			src.CurrentGame.InitJoueur()
 		case "reprendre":
 			src.Reprendre()
 		case "scores":

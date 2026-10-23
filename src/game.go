@@ -7,31 +7,27 @@ import (
 	"strings"
 )
 
-var partie Game
+var CurrentGame Game
 
 var lettre string
 var list_Lettres []string
 
-type Joueur struct {
-	Pseudo string
-}
-
-func (j *Joueur) InitJoueur() {
-	fmt.Print("Choisissez votre pseudo: ")
-	fmt.Scan(&j.Pseudo)
-	fmt.Println("Bonjour: ", j.Pseudo, "!")
-	partie.Jouer(j.Pseudo)
-}
-
 type Game struct {
-	Player      string
+	Pseudo      string
 	MotATrouver string
 	Mot         string
 	Essai       int
 	Lettre      []string
 }
 
-func (g *Game) Jouer(pseudo string) error {
+func (g *Game) InitJoueur() {
+	fmt.Print("Choisissez votre pseudo: ")
+	fmt.Scan(&g.Pseudo)
+	fmt.Println("Bonjour:", g.Pseudo, "!")
+	g.Jouer()
+}
+
+func (g *Game) Jouer() error {
 	compteurEssai := 0
 	fmt.Printf("Partie crée\n")
 	mot, err := os.ReadFile("mot.txt")
@@ -44,26 +40,32 @@ func (g *Game) Jouer(pseudo string) error {
 	g.MotATrouver = ListMot[randIndex]
 	g.Mot = strings.Repeat("_", len(g.MotATrouver))
 
-	for {
-		//p := Game{g.Player, g.MotATrouver, g.Mot, compteurEssai, list_Lettres}
+	fmt.Printf("1 : %v\n", g)
 
+	for {
+		currentPlay := Game{g.Pseudo, g.MotATrouver, g.Mot, compteurEssai, list_Lettres}
+		//debug(
+		fmt.Printf("for 1 : %v\n", g)
+		fmt.Printf("for 2 : %v\n", currentPlay)
+		//debug)
+
+		//ajoute toutes les données a la structure
 		fmt.Println("Mot à trouver: ")
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
-
 		if lettre == "!save" || lettre == "!s" {
-			save(pseudo, list_Lettres, compteurEssai, g.MotATrouver) // envoie les donnée de la partie
+			save(currentPlay) // envoie les donnée de la partie
 			return err
 		}
 		if len(lettre) != 1 {
-			fmt.Println("l'entrée doit être d'une seule lettre")
+			fmt.Println("l'entrée doit être d'une seule lettre") //verifie si l'entrée est de qu'une seule lettre
 			compteurEssai -= 1
 			continue
 		}
 
 		if lettre >= "A" && lettre <= "Z" {
-			lettre = strings.ToLower(lettre)
+			lettre = strings.ToLower(lettre) // met en minuscule les lettre en maj
 		}
 
 		dejaUtilisee := false
@@ -77,16 +79,16 @@ func (g *Game) Jouer(pseudo string) error {
 		for k := range g.MotATrouver {
 			if lettre[0] != g.MotATrouver[k] {
 				list_Lettres = append(list_Lettres, lettre)
-				compteurEssai += 1
+				compteurEssai++
 				fmt.Printf("Vous avez utilisé %d/6 essais ", compteurEssai)
 				break
 			}
 		}
 
 		if dejaUtilisee == false && (rune(lettre[0]) >= 'a' && rune(lettre[0]) <= 'z') {
-			g.Lettre = append(g.Lettre, lettre)
+			currentPlay.Lettre = append(g.Lettre, lettre)
 		}
-		fmt.Println(g.Lettre)
+		fmt.Println(list_Lettres) //liste de lettre deja proposé
 
 		for i := 0; i < len(g.Mot); i++ {
 			for j := 0; j < len(g.Lettre); j++ {
