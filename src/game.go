@@ -31,6 +31,7 @@ type Game struct {
 }
 
 func (g *Game) Jouer(pseudo string) error {
+	compteurEssai := 6
 	fmt.Printf("Partie crée\n")
 	mot, err := os.ReadFile("mot.txt")
 	if err != nil {
@@ -85,5 +86,11 @@ func (g *Game) Jouer(pseudo string) error {
 			}
 		}
 
+		if g.Mot == g.MotATrouver {
+			fmt.Println("Victoire ! Le mot a été trouvé.")
+			break
+		}
+
 	}
+	return nil
 }
