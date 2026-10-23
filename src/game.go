@@ -31,7 +31,7 @@ type Game struct {
 }
 
 func (g *Game) Jouer() error {
-	//compteurEssai := 0
+	compteurEssai := 6
 	fmt.Printf("Partie crée\n")
 	mot, err := os.ReadFile("mot.txt")
 	if err != nil {
@@ -48,17 +48,22 @@ func (g *Game) Jouer() error {
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
+		if len(lettre) != 1 {
+			fmt.Println("l'entrée doit être d'une seule lettre")
+			compteurEssai += 1
+			continue
+		}
 
 		if (lettre >= "A" && lettre <= "Z") {
 			lettre = strings.ToLower(lettre)
 		}
 
-		//for k,_ := range  
-
-		if len(lettre) != 1 {
-			fmt.Println("l'entrée doit être d'une seule lettre")
-			fmt.Println("Veuiller entrer une nouvelle lettre: ")
-			fmt.Scan(&lettre)
+		for k := range g.MotATrouver {
+			if lettre[0] != g.MotATrouver[k] {
+				compteurEssai -= 1
+				fmt.Printf("Il reste %d essais ", compteurEssai)
+				break
+			}
 		}
 
 		dejaUtilisee := false
