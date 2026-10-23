@@ -49,12 +49,19 @@ func (g *Game) Jouer(pseudo string) error {
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
+		if len(lettre) != 1 {
+			fmt.Println("l'entrée doit être d'une seule lettre")
+			compteurEssai -= 1
+			continue
+		}
+
 		if lettre == "!save" || lettre == "!s" {
 			strings.ToLower(lettre)
 
 			save(pseudo, lettre, 0) // envoie les donnée de la partie
 			return err
 		}
+
 		if lettre >= "A" && lettre <= "Z" {
 			lettre = strings.ToLower(lettre)
 		}
@@ -70,6 +77,14 @@ func (g *Game) Jouer(pseudo string) error {
 		for l := range g.Lettre {
 			if g.Lettre[l] == lettre {
 				dejaUtilisee = true
+			}
+		}
+
+		for k := range g.MotATrouver {
+			if lettre[0] != g.MotATrouver[k] {
+				compteurEssai += 1
+				fmt.Printf("Vous avez utilisé %d/6 essais ", compteurEssai)
+				break
 			}
 		}
 
@@ -97,3 +112,4 @@ func (g *Game) Jouer(pseudo string) error {
 	}
 	return nil
 }
+
