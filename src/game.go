@@ -76,6 +76,10 @@ func (g *Game) Jouer(pseudo string) error {
 			}
 		}
 
+		if compteurEssai == 6 {
+			fmt.Println("")
+		}
+
 		if dejaUtilisee == false && (rune(lettre[0]) >= 'a' && rune(lettre[0]) <= 'z') {
 			g.Lettre = append(g.Lettre, lettre)
 		}
