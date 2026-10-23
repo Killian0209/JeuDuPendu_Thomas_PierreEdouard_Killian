@@ -16,10 +16,10 @@ type Joueur struct {
 }
 
 func (j *Joueur) InitJoueur() {
-	fmt.Println("Choisissez votre pseudo: ")
+	fmt.Print("Choisissez votre pseudo: ")
 	fmt.Scan(&j.Pseudo)
 	fmt.Println("Bonjour: ", j.Pseudo, "!")
-	partie.Jouer()
+	partie.Jouer(j.Pseudo)
 }
 
 type Game struct {
@@ -30,7 +30,7 @@ type Game struct {
 	Lettre      []string
 }
 
-func (g *Game) Jouer() error {
+func (g *Game) Jouer(pseudo string) error {
 	fmt.Printf("Partie crée\n")
 	mot, err := os.ReadFile("mot.txt")
 	if err != nil {
@@ -47,12 +47,15 @@ func (g *Game) Jouer() error {
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
-
-		if (lettre >= "A" && lettre <= "Z") {
+		if lettre == "!save" || lettre == "!s" {
+			save(pseudo, strings.ToLower(lettre), 0) // envoie les donnée de la partie
+			return err
+		}
+		if lettre >= "A" && lettre <= "Z" {
 			lettre = strings.ToLower(lettre)
 		}
 
-		if len(lettre) != 1 {
+		if len(lettre) != 1 && (lettre != "!save" && lettre != "!s") {
 			fmt.Println("l'entrée doit être d'une seule lettre")
 			fmt.Println("Veuiller entrer une nouvelle lettre: ")
 			fmt.Scan(&lettre)
@@ -82,6 +85,5 @@ func (g *Game) Jouer() error {
 			}
 		}
 
-		
 	}
 }

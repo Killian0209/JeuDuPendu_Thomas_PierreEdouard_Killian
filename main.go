@@ -20,7 +20,6 @@ func main() {
 			src.Scores()
 		default:
 			fmt.Println("Commande incorrecte")
-
 		}
 	} else {
 		fmt.Println("il faut écrire pour commencer: go run . jouer")
@@ -28,5 +27,3 @@ func main() {
 		fmt.Println("il faut écrire pour scores: go run . scores")
 	}
 }
-
-
