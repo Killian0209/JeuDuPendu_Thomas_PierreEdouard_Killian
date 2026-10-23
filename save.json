@@ -1,10 +1,10 @@
 {
-Name = gyp
+Name = gypgop
 	Lettres = !s
-	Tries = 0
+	Tries = 3
 }
 {
-Name = gyp
-	Lettres = !s
-	Tries = 0
+Name = a
+	Lettres = !save
+	Tries = 2
 }
