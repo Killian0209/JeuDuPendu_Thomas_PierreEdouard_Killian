@@ -51,15 +51,13 @@ func (g *Game) Jouer(pseudo string) error {
 		fmt.Scan(&lettre)
 		if lettre == "!save" || lettre == "!s" {
 			lettre = strings.ToLower(lettre)
+			save(pseudo, lettre, 0) // envoie les donnée de la partie
+			return err
 		}
 		if len(lettre) != 1 {
 			fmt.Println("l'entrée doit être d'une seule lettre") //verifie si l'entrée est de qu'une seule lettre
 			compteurEssai -= 1
 			continue
-		}
-
-			save(pseudo, lettre, 0) // envoie les donnée de la partie
-			return err
 		}
 
 		if lettre >= "A" && lettre <= "Z" {
@@ -106,4 +104,3 @@ func (g *Game) Jouer(pseudo string) error {
 	}
 	return nil
 }
-
