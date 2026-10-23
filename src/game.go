@@ -24,7 +24,7 @@ func (j *Joueur) InitJoueur() {
 }
 
 type Game struct {
-	Player      Joueur
+	Player      string
 	MotATrouver string
 	Mot         string
 	Essai       int
@@ -45,14 +45,15 @@ func (g *Game) Jouer(pseudo string) error {
 	g.Mot = strings.Repeat("_", len(g.MotATrouver))
 
 	for {
+		//p := Game{g.Player, g.MotATrouver, g.Mot, compteurEssai, list_Lettres}
+
 		fmt.Println("Mot à trouver: ")
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre: ")
 		fmt.Scan(&lettre)
 
 		if lettre == "!save" || lettre == "!s" {
-
-			save(pseudo, list_Lettres, compteurEssai) // envoie les donnée de la partie
+			save(pseudo, list_Lettres, compteurEssai, g.MotATrouver) // envoie les donnée de la partie
 			return err
 		}
 		if len(lettre) != 1 {
