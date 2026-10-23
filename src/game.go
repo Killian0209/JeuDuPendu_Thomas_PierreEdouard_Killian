@@ -11,6 +11,10 @@ var partie Game
 
 var lettre string
 
+type Joueur struct {
+	Pseudo string
+}
+
 func (j *Joueur) InitJoueur() {
 	fmt.Println("Choisissez votre pseudo: ")
 	fmt.Scan(&j.Pseudo)
@@ -19,7 +23,7 @@ func (j *Joueur) InitJoueur() {
 }
 
 type Game struct {
-	Pseudo      string
+	Player      Joueur
 	MotATrouver string
 	Mot         string
 	Essai       int
@@ -49,7 +53,7 @@ func (g *Game) Jouer() error {
 			lettre = strings.ToLower(lettre)
 		}
 
-		//for k,_ := range g.MOt 
+		//for k,_ := range  
 
 		if len(lettre) != 1 {
 			fmt.Println("l'entrée doit être d'une seule lettre")
