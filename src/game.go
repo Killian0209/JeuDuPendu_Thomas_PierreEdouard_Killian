@@ -56,7 +56,6 @@ func (g *Game) Jouer(pseudo string) error {
 		
 		if len(lettre) != 1 {
 			fmt.Println("l'entrée doit être d'une seule lettre") //verifie si l'entrée est de qu'une seule lettre
-			compteurEssai --
 			continue
 		}
 		
@@ -71,29 +70,8 @@ func (g *Game) Jouer(pseudo string) error {
 		if dejaUtilisee == false && (rune(lettre[0]) >= 'a' && rune(lettre[0]) <= 'z') {
 			g.Lettre = append(g.Lettre, lettre)
 		}
+		
 		fmt.Println(g.Lettre)
-
-		if compteurEssai < 0 {
-			compteurEssai = 0
-		}
-
-		if compteurEssai >= 6 {
-			fmt.Println("Tous les essais ont été utilisés")
-			fmt.Println("Partie Perdu !")
-			break
-		}
-
-		for k := range g.Mot {
-			if lettre == string(g.Mot[k]) {
-				compteurEssai --
-			}
-			if lettre[0] != g.Mot[k] {
-				list_Lettres = append(list_Lettres, lettre)
-				compteurEssai ++
-				fmt.Printf("Vous avez utilisé %d/6 essais ", compteurEssai)
-				break
-			}
-		}
 
 		for i := 0; i < len(g.Mot); i++ {
 			for j := 0; j < len(g.Lettre); j++ {
