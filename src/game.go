@@ -45,8 +45,6 @@ func (g *Game) Jouer() error {
 
 	for {
 
-		fmt.Print("\033[H\033[2J")
-
 		fmt.Println("Mot à trouver:")
 		fmt.Println("==>", g.Mot)
 		fmt.Println("Entrez une lettre:")
