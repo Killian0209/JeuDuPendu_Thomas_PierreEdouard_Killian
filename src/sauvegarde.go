@@ -20,6 +20,21 @@ func Reprendre() {
 	var nom string
 	fmt.Scan(&nom)
 
+	//on cherche le pseudo les 3 lignes d'après sont lettres mot et tries
+	var partie Game
+	trouve := false
+	for i, ligne := range lignes {
+		if strings.TrimSpace(ligne) == "name= "+nom {
+			partie.Pseudo = nom
+			partie.Lettre = strings.Fields(strings.Trim(strings.TrimPrefix(lignes[i+1], "lettres= "), "[]"))
+			partie.MotATrouver = strings.TrimSpace(strings.TrimPrefix(lignes[i+2], "mot= "))
+			partie.Essai, _ = strconv.Atoi(strings.TrimSpace(strings.TrimPrefix(lignes[i+3], "tries= ")))
+			trouve = true
+		}
+	}
+
+	
+
 func save(play Game) {
 	fmt.Printf("%v", play)
 	file, err := os.OpenFile("save.json", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
