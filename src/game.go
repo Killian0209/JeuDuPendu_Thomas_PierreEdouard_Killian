@@ -60,7 +60,7 @@ func (g *Game) Jouer() error {
 
 		// Sauvegarde
 		if input == "!save" || input == "!s" {
-			save(*g)
+			Save(*g)
 			return nil
 		}
 
