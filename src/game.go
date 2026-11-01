@@ -19,8 +19,16 @@ type Game struct {
 }
 
 func (g *Game) InitJoueur() {
-	fmt.Print("Choisissez votre pseudo: ")
-	fmt.Scan(&g.Pseudo)
+	for {
+		fmt.Print("Choisissez votre pseudo: ")
+		fmt.Scan(&g.Pseudo)
+
+		if pseudoUtilise(g.Pseudo) {
+			fmt.Println("Ce pseudo est déjà utilisé, choisissez-en un autre")
+		} else {
+			break //si pseudo pas utilisé
+		}
+	}
 	fmt.Println("Bonjour:", g.Pseudo, "!")
 	g.Jouer()
 }
