@@ -136,11 +136,13 @@ func (g *Game) Jouer() error {
 		// Fin de partie
 		if g.Mot == g.MotATrouver {
 			fmt.Println("Victoire ! Le mot a été trouvé.")
+			enregistrerScore(*g, "victoire")
 			break
 		}
 		if g.Essai >= 6 {
 			fmt.Println("Tous les essais ont été utilisés")
 			fmt.Println("Partie Perdu !") //skill issue
+			enregistrerScore(*g, "défaite")
 			break
 		}
 	}
