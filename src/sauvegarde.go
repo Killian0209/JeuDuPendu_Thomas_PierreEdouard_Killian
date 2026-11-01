@@ -37,7 +37,12 @@ func Reprendre() {
 			}
 
 			// ligne mot
-			partie.MotATrouver = strings.Fields(lignes[i+2])[1]
+			position, _ := strconv.Atoi(strings.Fields(lignes[i+2])[1])
+			motFichier, _ := os.ReadFile("mot.txt")
+			listeMots := strings.Fields(string(motFichier))
+			if position < len(listeMots) {
+				partie.MotATrouver = listeMots[position]
+			}
 
 			// ligne tries
 			partie.Essai, _ = strconv.Atoi(strings.Fields(lignes[i+3])[1])
