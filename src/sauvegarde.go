@@ -33,6 +33,11 @@ func Reprendre() {
 		}
 	}
 
+	if !trouve {
+		fmt.Println("Aucune sauvegarde pour ce pseudo")
+		return
+	}
+}
 	
 
 func save(play Game) {
