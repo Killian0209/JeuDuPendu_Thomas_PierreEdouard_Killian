@@ -1,20 +1,6 @@
 {
-Name = gypgop
-	Lettres = !s
-	Tries = 3
-}
-{
-Name = a
-	Lettres = !save
-	Tries = 2
-}
-{
-Name = gypgop
-	Lettres = [a b c]
-	Tries = 3
-}
-{
-Name = a
-	Lettres = [a b c v e f f f f f f f f f f f f f f g d b g z]
-	Tries = 23
+Name = gypggop
+	Lettres = [a b c d e f g h i u o y]
+	Mot = voiture
+Tries = 12
 }
