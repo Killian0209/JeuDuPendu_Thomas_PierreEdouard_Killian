@@ -4,3 +4,9 @@ lettres= [a b c]
 mot= fromage
 tries= 2
 }
+{
+name= kiki
+lettres= [a e f u i]
+mot= banane
+tries= 3
+}
