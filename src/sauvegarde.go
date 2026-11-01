@@ -3,29 +3,22 @@ package src
 import (
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
+	"unicode"
 )
 
-func Reprendre() /*Game*/ {
-	var save []byte
-	i := 0
+func Reprendre() {
 	saveFile, err := os.ReadFile("save.json")
 	if err != nil {
-		panic(err)
+		fmt.Println("Aucune sauvegarde trouvée")
+		return
 	}
-	fmt.Printf("quel nom ?") // todo, changere le text
-	fmt.Scanf("%s", &save)
-	for string(saveFile[i:i+5]) != "name=" { //check jusqu'a "name=" c'est le nom
-		i++
-	}
-	i += 6
-	for saveFile[i] != '\n' {
-		fmt.Printf("-%c-", saveFile[i])
-		i++
-	}
+	lignes := strings.Split(string(saveFile), "\n")
 
-	fmt.Printf("name = %s", save)
-	//return play
-}
+	fmt.Print("Quel est ton pseudo ? ")
+	var nom string
+	fmt.Scan(&nom)
 
 func save(play Game) {
 	fmt.Printf("%v", play)
