@@ -29,9 +29,11 @@ func (g *Game) Jouer() error {
 	fmt.Printf("Partie crée\n")
 
 	//	 Choix du mot
-	mot, err := os.ReadFile("mot.txt")
-	if err != nil {
-		return err
+	if g.MotATrouver == "" {
+		mot, err := os.ReadFile("mot.txt")
+		if err != nil {
+			return err
+		}
 	}
 
 	ListMot := strings.Fields(string(mot))
