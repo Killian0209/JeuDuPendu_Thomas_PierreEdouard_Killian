@@ -56,7 +56,7 @@ func Reprendre() {
 		return
 	}
 
-		// pour chaque lettre du mot : si elle a été proposée on l'affiche, sinon "_"
+	// pour chaque lettre du mot : si elle a été proposée on l'affiche, sinon "_"
 	partie.Mot = ""
 	for _, l := range partie.MotATrouver {
 		dejaTrouvee := false
@@ -66,7 +66,7 @@ func Reprendre() {
 			}
 		}
 		if dejaTrouvee || !unicode.IsLetter(l) {
-			partie.Mot += string(l)
+			partie.Mot += string(l) // tt ce qui est - ou ' etc...
 		} else {
 			partie.Mot += "_"
 		}
