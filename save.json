@@ -1,6 +1,6 @@
 {
-Name = gypggop
-	Lettres = [a b c d e f g h i u o y]
-	Mot = voiture
-Tries = 12
+name= gypgop
+lettres= [a b c]
+mot= fromage
+tries= 2
 }
