@@ -88,5 +88,12 @@ func pseudoUtilise(pseudo string) bool {
 		return false
 	}
 
-	
+	lignes := strings.Split(string(contenu), "\n")
+	for _, ligne := range lignes {
+		mots := strings.Fields(ligne)
+		if len(mots) == 2 && mots[0] == "name=" && mots[1] == pseudo {
+			return true
+		}
+	}
+	return false
 }
