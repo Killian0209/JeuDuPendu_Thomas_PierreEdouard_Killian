@@ -54,7 +54,7 @@ func (g *Game) Jouer() error {
 			if unicode.IsLetter(l) {
 				g.Mot += "_"
 			} else {
-				g.Mot += string(l) // un - ou un ' s'affiche directement
+				g.Mot += string(l) // - ou ' s'affiche
 			}
 		}
 		g.Essai = 0

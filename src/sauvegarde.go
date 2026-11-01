@@ -73,12 +73,26 @@ func Reprendre() {
 	
 
 func Save(play Game) {
+	contenu, err := os.ReadFile("mot.txt")
+	if err != nil {
+		panic(err)
+	}
+	listeMots := strings.Fields(string(contenu))
+	position := 0
+	for i, m := range listeMots {
+		if m == play.MotATrouver {
+			position = i
+		}
+	}
+
 	file, err := os.OpenFile("save.json", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
+
 	fmt.Printf("saving game...")
-	content := fmt.Sprintf("{\nname= %s\nlettres= %s\nmot= %s\ntries= %d\n}\n", play.Pseudo, play.Lettre, play.MotATrouver, play.Essai) // mis en forme pour que ce soit lisible
+	content := fmt.Sprintf("{\nname= %s\nlettres= %s\nmot= %d\ntries= %d\n}\n", play.Pseudo, play.Lettre, position, play.Essai) // mot= devient un numéro
 	file.WriteString(content)
 }
 
