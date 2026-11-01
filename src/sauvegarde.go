@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 func Reprendre() {
@@ -59,7 +60,7 @@ func Reprendre() {
 				dejaTrouvee = true
 			}
 		}
-		if dejaTrouvee {
+		if dejaTrouvee || !unicode.IsLetter(l) {
 			partie.Mot += string(l)
 		} else {
 			partie.Mot += "_"

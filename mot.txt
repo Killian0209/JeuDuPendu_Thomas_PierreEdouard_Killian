@@ -1,14 +1,1 @@
-chat
-maison
-soleil
-arbre
-nuage
-pomme
-voiture
-jardin
-banane
-fromage
-cheval
-dragon
-pirate
-chocolat
+chef-d'oeuvre

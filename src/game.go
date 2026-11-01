@@ -49,7 +49,14 @@ func (g *Game) Jouer() error {
 
 		randIndex := rand.Intn(len(ListMot))
 		g.MotATrouver = ListMot[randIndex]
-		g.Mot = strings.Repeat("_", len([]rune(g.MotATrouver)))
+		g.Mot = ""
+		for _, l := range g.MotATrouver {
+			if unicode.IsLetter(l) {
+				g.Mot += "_"
+			} else {
+				g.Mot += string(l) // un - ou un ' s'affiche directement
+			}
+		}
 		g.Essai = 0
 		g.Lettre = nil
 	}
