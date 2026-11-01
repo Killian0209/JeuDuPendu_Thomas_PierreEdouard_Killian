@@ -79,6 +79,7 @@ func (g *Game) Jouer() error {
 			if strings.ToLower(input) == strings.ToLower(g.MotATrouver) {
 				g.Mot = g.MotATrouver
 				fmt.Println("Victoire ! Le mot a été trouvé.")
+				enregistrerScore(*g, "victoire")
 				break
 			}
 			g.Essai += 2
@@ -86,6 +87,7 @@ func (g *Game) Jouer() error {
 			if g.Essai >= 6 {
 				fmt.Println("Tous les essais ont été utilisés")
 				fmt.Println("Partie Perdu !") //skill issue
+				enregistrerScore(*g, "défaite")
 				break
 			}
 			continue
