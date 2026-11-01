@@ -37,6 +37,20 @@ func Reprendre() {
 		fmt.Println("Aucune sauvegarde pour ce pseudo")
 		return
 	}
+
+	// on refait le mot avec les "_" à partir des lettres déjà proposées
+	motAffiche := []rune(strings.Repeat("_", len([]rune(partie.MotATrouver))))
+	for i, l := range []rune(partie.MotATrouver) {
+		for _, lettre := range partie.Lettre {
+			if lettre == string(unicode.ToLower(l)) {
+				motAffiche[i] = l
+			}
+		}
+	}
+	partie.Mot = string(motAffiche)
+
+	CurrentGame = partie
+	CurrentGame.Jouer()
 }
 	
 
