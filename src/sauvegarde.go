@@ -13,7 +13,7 @@ func Reprendre() {
 		fmt.Println("Aucune sauvegarde trouvée")
 		return
 	}
-	lignes := strings.Split(string(contenu), "\n") // une case du tableau = une ligne du fichier
+	lignes := strings.Split(string(contenu), "\n")
 
 	fmt.Print("Quel est ton pseudo ? ")
 	var nom string
@@ -23,22 +23,22 @@ func Reprendre() {
 	trouve := false
 
 	for i := 0; i < len(lignes)-3; i++ {
-		mots := strings.Fields(lignes[i]) // "name= exemple" devient ["name=", "exemple"]
+		mots := strings.Fields(lignes[i])
 		if len(mots) == 2 && mots[0] == "name=" && mots[1] == nom {
 			partie.Pseudo = nom
 
-			// ligne lettres= [a b c d e]
+			// ligne lettres
 			for _, m := range strings.Fields(lignes[i+1])[1:] {
-				m = strings.Trim(m, "[]") // on enlève les crochets
+				m = strings.Trim(m, "[]")
 				if m != "" {
 					partie.Lettre = append(partie.Lettre, m)
 				}
 			}
 
-			// ligne mot= banane
+			// ligne mot
 			partie.MotATrouver = strings.Fields(lignes[i+2])[1]
 
-			// ligne tries= 3
+			// ligne tries
 			partie.Essai, _ = strconv.Atoi(strings.Fields(lignes[i+3])[1])
 
 			trouve = true
