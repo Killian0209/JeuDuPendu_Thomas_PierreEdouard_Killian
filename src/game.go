@@ -34,18 +34,17 @@ func (g *Game) Jouer() error {
 		if err != nil {
 			return err
 		}
-	}
+		ListMot := strings.Fields(string(mot))
+		if len(ListMot) == 0 {
+			return fmt.Errorf("mot.txt ne contient aucun mot")
+		}
 
-	ListMot := strings.Fields(string(mot))
-	if len(ListMot) == 0 {
-		return fmt.Errorf("mot.txt ne contient aucun mot")
+		randIndex := rand.Intn(len(ListMot))
+		g.MotATrouver = ListMot[randIndex]
+		g.Mot = strings.Repeat("_", len([]rune(g.MotATrouver)))
+		g.Essai = 0
+		g.Lettre = nil
 	}
-
-	randIndex := rand.Intn(len(ListMot))
-	g.MotATrouver = ListMot[randIndex]
-	g.Mot = strings.Repeat("_", len([]rune(g.MotATrouver)))
-	g.Essai = 0
-	g.Lettre = nil
 
 	//	Boucle de jeu
 	for {
