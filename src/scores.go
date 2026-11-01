@@ -1,7 +1,23 @@
 package src
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+	"time"
+)
 
-func Scores() {
-	fmt.Println("Scores: ")
+//enregistrement du score
+func enregistrerScore(play Game, resultat string) {
+	file, err := os.OpenFile("scores.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		fmt.Println("Impossible d'enregistrer le score")
+		return
+	}
+	defer file.Close()
+
+	date := time.Now().Format("02/01/2006 15:04") // date
+	ligne := play.Pseudo + ";" + resultat + ";" + strconv.Itoa(play.Essai) + ";" + play.MotATrouver + ";" + date + "\n"
+	file.WriteString(ligne)
 }
